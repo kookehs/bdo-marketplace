@@ -1,6 +1,11 @@
 # bdo-marketplace
 💱 collecting data from Black Desert Online's marketplace
 
+## Features
+- Prices from `market.blackdesertonline.com` API
+- Regional Markets
+- Dump to CSV
+
 ## Usage
 1. Configure config.json
 ```
