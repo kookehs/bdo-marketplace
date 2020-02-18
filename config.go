@@ -5,4 +5,5 @@ type Config struct {
 	Output string `json:"output"`
 	Cookie string `json:"cookie"`
 	Token  string `json:"token"`
+	URL    string `json:"url"`
 }

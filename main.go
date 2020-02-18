@@ -23,6 +23,7 @@ func main() {
 	}
 
 	bdomc := NewBDOMarketplaceClient(
+		c.URL,
 		map[string]string{
 			"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
 			"Cookie":       c.Cookie,

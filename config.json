@@ -2,5 +2,6 @@
 	"input": "items.json",
 	"output": "items.csv",
 	"cookie": "",
-	"token": ""
+	"token": "",
+	"url": "https://marketweb-na.blackdesertonline.com"
 }

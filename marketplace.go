@@ -10,8 +10,6 @@ import (
 )
 
 const (
-	BaseURL = "https://marketweb-na.blackdesertonline.com"
-
 	CookieKey      = "Cookie"
 	ContentTypeKey = "Content-Type"
 	MainKeyKey     = "mainKey"
@@ -40,13 +38,15 @@ type WorldMarketSearchSubListItem struct {
 }
 
 type BDOMarketplaceClient struct {
+	BaseURL                  string
 	Client                   *http.Client
 	Headers                  map[string]string
 	RequestVerificationToken string
 }
 
-func NewBDOMarketplaceClient(headers map[string]string, token string) *BDOMarketplaceClient {
+func NewBDOMarketplaceClient(url string, headers map[string]string, token string) *BDOMarketplaceClient {
 	return &BDOMarketplaceClient{
+		BaseURL: url,
 		Client: &http.Client{
 			Timeout: time.Second,
 		},

@@ -18,8 +18,8 @@ type Item struct {
 type Items []Item
 
 type ItemInfo struct {
-	ID string
-	Name string
+	ID    string
+	Name  string
 	Grade string
 	Price string
 }
@@ -58,8 +58,8 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 
 		if len(gwmsslr.DetailList) > 0 {
 			ii := ItemInfo{
-				ID: v.ID,
-				Name: v.Name,
+				ID:    v.ID,
+				Name:  v.Name,
 				Grade: v.Grade,
 				Price: strconv.Itoa(gwmsslr.DetailList[0].PricePerOne),
 			}
