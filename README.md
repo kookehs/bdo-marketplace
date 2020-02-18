@@ -12,8 +12,8 @@
 {
 	"input": "filename with list of items to get prices for",
 	"output": "filename of where to dump CSV data",
-	"cookie": "_bdid, ASP.NET_SessionId, and __RequestVerificationToken obtained from making a request
-	"token": "request verification token obtained from making a sub list request",
+	"cookie": "__RequestVerificationToken obtained from session
+	"token": "__RequestVerificationToken obtained from making a sub list request",
 	"url": "regional URL"
 }
 ```
