@@ -22,6 +22,7 @@ type ItemInfo struct {
 	Name  string
 	Grade string
 	Price string
+	Count int
 }
 
 type ItemInfos []ItemInfo
@@ -48,6 +49,11 @@ func GetItemList(path string) *Items {
 func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 	ret := make(ItemInfos, 0)
 
+	if items == nil || len(*items) == 0 {
+		fmt.Println("No items to fetch.")
+		return nil
+	}
+
 	for _, v := range *items {
 		gwmsslr := client.GetWorldMarketSearchSubList(v.ID)
 
@@ -62,6 +68,7 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 				Name:  v.Name,
 				Grade: v.Grade,
 				Price: strconv.Itoa(gwmsslr.DetailList[0].PricePerOne),
+				Count: gwmsslr.DetailList[0].Count,
 			}
 
 			ret = append(ret, ii)
@@ -72,6 +79,11 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 }
 
 func DumpToCSV(path string, items ItemInfos) {
+	if items == nil {
+		fmt.Println("Nothing to dump.")
+		return
+	}
+
 	f, err := os.Create(path)
 
 	if err != nil {
@@ -81,11 +93,11 @@ func DumpToCSV(path string, items ItemInfos) {
 
 	defer f.Close()
 	w := csv.NewWriter(f)
-	r := []string{"id", "name", "grade", "price"}
+	r := []string{"id", "name", "grade", "price", "count"}
 	w.Write(r)
 
 	for _, v := range items {
-		r = []string{v.ID, v.Name, v.Grade, v.Price}
+		r = []string{v.ID, v.Name, v.Grade, v.Price, strconv.Itoa(v.Count)}
 		w.Write(r)
 	}
 

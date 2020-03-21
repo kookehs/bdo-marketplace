@@ -58,7 +58,7 @@ func NewBDOMarketplaceClient(url string, headers map[string]string, token string
 func (bdomc *BDOMarketplaceClient) GetWorldMarketSearchSubList(id string) *GetWorldMarketSearchSubListResponse {
 	e := "/Home/GetWorldMarketSubList"
 	b := TokenKey + "=" + bdomc.RequestVerificationToken + "&" + MainKeyKey + "=" + id + "&" + "usingCleint=0"
-	r, err := http.NewRequest("POST", BaseURL+e, bytes.NewBufferString(b))
+	r, err := http.NewRequest("POST", bdomc.BaseURL+e, bytes.NewBufferString(b))
 
 	if err != nil {
 		fmt.Println(err)

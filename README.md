@@ -12,7 +12,7 @@
 {
 	"input": "filename with list of items to get prices for",
 	"output": "filename of where to dump CSV data",
-	"cookie": "__RequestVerificationToken obtained from session
+	"cookie": "__RequestVerificationToken obtained from session",
 	"token": "__RequestVerificationToken obtained from making a sub list request",
 	"url": "regional URL"
 }
