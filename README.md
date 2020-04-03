@@ -28,8 +28,8 @@ bdo-marketplace-windows64.exe
 ```
 3. Upload CSV dump to your spreadsheet
 ```
-id,name,grade,price
-9213,Beer,1,840
-9283,Cold Draft Beer,2,1440
+id,name,grade,price,count
+9213,Beer,1,1050,98870
+9283,Cold Draft Beer,2,2030,34326
 ```
 4. Profit
