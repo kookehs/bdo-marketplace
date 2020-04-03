@@ -3,5 +3,6 @@
 	"output": "items.csv",
 	"cookie": "",
 	"token": "",
-	"url": "https://marketweb-na.blackdesertonline.com"
+	"url": "https://marketweb-na.blackdesertonline.com",
+	"timeout": "1s"
 }

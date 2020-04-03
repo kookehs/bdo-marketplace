@@ -44,11 +44,18 @@ type BDOMarketplaceClient struct {
 	RequestVerificationToken string
 }
 
-func NewBDOMarketplaceClient(url string, headers map[string]string, token string) *BDOMarketplaceClient {
+func NewBDOMarketplaceClient(url string, headers map[string]string, token, timeout string) *BDOMarketplaceClient {
+	d, err := time.ParseDuration(timeout)
+
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
 	return &BDOMarketplaceClient{
 		BaseURL: url,
 		Client: &http.Client{
-			Timeout: time.Second,
+			Timeout: d,
 		},
 		Headers:                  headers,
 		RequestVerificationToken: token,
