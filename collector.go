@@ -18,11 +18,12 @@ type Item struct {
 type Items []Item
 
 type ItemInfo struct {
-	ID    string
-	Name  string
-	Grade string
-	Price string
-	Count int
+	ID          int
+	Name        string
+	Grade       int
+	Enhancement int
+	Price       int
+	Count       int
 }
 
 type ItemInfos []ItemInfo
@@ -62,17 +63,34 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 			continue
 		}
 
-		if len(gwmsslr.DetailList) > 0 {
+		for _, dl := range gwmsslr.DetailList {
+			id, err := strconv.Atoi(v.ID)
+
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+
+			grade, err := strconv.Atoi(v.Grade)
+
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
+
 			ii := ItemInfo{
-				ID:    v.ID,
-				Name:  v.Name,
-				Grade: v.Grade,
-				Price: strconv.Itoa(gwmsslr.DetailList[0].PricePerOne),
-				Count: gwmsslr.DetailList[0].Count,
+				ID:          id,
+				Name:        v.Name,
+				Grade:       grade,
+				Enhancement: dl.SubKey,
+				Price:       dl.PricePerOne,
+				Count:       dl.Count,
 			}
 
 			ret = append(ret, ii)
 		}
+
+		fmt.Println("Retrieved price for " + v.Name)
 	}
 
 	return ret
@@ -93,12 +111,26 @@ func DumpToCSV(path string, items ItemInfos) {
 
 	defer f.Close()
 	w := csv.NewWriter(f)
-	r := []string{"id", "name", "grade", "price", "count"}
-	w.Write(r)
+	r := []string{"id", "name", "grade", "enhancement", "price", "count"}
+
+	if err := w.Write(r); err != nil {
+		fmt.Println(err)
+	}
 
 	for _, v := range items {
-		r = []string{v.ID, v.Name, v.Grade, v.Price, strconv.Itoa(v.Count)}
-		w.Write(r)
+		r = []string{
+			strconv.Itoa(v.ID),
+			v.Name,
+			strconv.Itoa(v.Grade),
+			strconv.Itoa(v.Enhancement),
+			strconv.Itoa(v.Price),
+			strconv.Itoa(v.Count),
+		}
+
+		if err := w.Write(r); err != nil {
+			fmt.Println(err)
+		}
+
 	}
 
 	w.Flush()

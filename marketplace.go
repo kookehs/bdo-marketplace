@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"path"
 	"time"
 )
 
@@ -65,7 +67,16 @@ func NewBDOMarketplaceClient(url string, headers map[string]string, token, timeo
 func (bdomc *BDOMarketplaceClient) GetWorldMarketSearchSubList(id string) *GetWorldMarketSearchSubListResponse {
 	e := "/Home/GetWorldMarketSubList"
 	b := TokenKey + "=" + bdomc.RequestVerificationToken + "&" + MainKeyKey + "=" + id + "&" + "usingCleint=0"
-	r, err := http.NewRequest("POST", bdomc.BaseURL+e, bytes.NewBufferString(b))
+
+	u, err := url.Parse(bdomc.BaseURL)
+
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	u.Path = path.Join(u.Path, e)
+	r, err := http.NewRequest("POST", u.String(), bytes.NewBufferString(b))
 
 	if err != nil {
 		fmt.Println(err)
