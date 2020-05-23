@@ -6,6 +6,21 @@
 - Regional Markets
 - Dump to CSV
 
+## Obtaining credentials for API calls
+You can use the developer tools provided by your browser to look at network requests for the site.
+
+0. You may need to spoof `User-Agent` as a mobile browser. Not sure if they have removed the restriction on viewing marketplace from mobile only.
+1. https://market.blackdesertonline.com/
+    - Select your region and sign in.
+2. Open `Developer Tools` for your browser and select `Network`.
+    - For Chrome it's `Ctrl+Shift+I` and click `Network` tab.
+    - For Firefox it's `Ctrl+Shift+E` to open `Network` tab.
+3. Click the search icon. Search for any item.
+4. Click on the listing to open up details for that item.
+5. Check for a request to `GetWorldMarketSubList` in `Network` tab.
+    - `cookie` is found in ` Request Headers` under `Cookie` -> `__RequestVerificationToken`.
+   - `token` is found in `Form Data` under `__RequestVerificationToken`.
+
 ## Usage
 1. Configure config.json
 ```
