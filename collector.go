@@ -24,6 +24,8 @@ type ItemInfo struct {
 	Enhancement int
 	Price       int
 	Count       int
+	Maximum     int
+	Minimum     int
 }
 
 type ItemInfos []ItemInfo
@@ -78,6 +80,27 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 				continue
 			}
 
+			gisbi := client.GetItemSellBuyInfo(id, dl.SubKey)
+
+			if gisbi == nil {
+				fmt.Println("Failed to get detailed price info for " + v.Name)
+			}
+
+			max := dl.PricePerOne
+			min := dl.PricePerOne
+
+			if gisbi != nil {
+				for _, c := range gisbi.MarketConditionList {
+					if c.PricePerOne > max {
+						max = c.PricePerOne
+					}
+
+					if c.PricePerOne < min {
+						min = c.PricePerOne
+					}
+				}
+			}
+
 			ii := ItemInfo{
 				ID:          id,
 				Name:        v.Name,
@@ -85,6 +108,8 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 				Enhancement: dl.SubKey,
 				Price:       dl.PricePerOne,
 				Count:       dl.Count,
+				Maximum:     max,
+				Minimum:     min,
 			}
 
 			ret = append(ret, ii)
@@ -111,7 +136,7 @@ func DumpToCSV(path string, items ItemInfos) {
 
 	defer f.Close()
 	w := csv.NewWriter(f)
-	r := []string{"id", "name", "grade", "enhancement", "price", "count"}
+	r := []string{"id", "name", "grade", "enhancement", "maximum", "minimum", "price", "count"}
 
 	if err := w.Write(r); err != nil {
 		fmt.Println(err)
@@ -123,6 +148,8 @@ func DumpToCSV(path string, items ItemInfos) {
 			v.Name,
 			strconv.Itoa(v.Grade),
 			strconv.Itoa(v.Enhancement),
+			strconv.Itoa(v.Maximum),
+			strconv.Itoa(v.Minimum),
 			strconv.Itoa(v.Price),
 			strconv.Itoa(v.Count),
 		}
@@ -130,7 +157,6 @@ func DumpToCSV(path string, items ItemInfos) {
 		if err := w.Write(r); err != nil {
 			fmt.Println(err)
 		}
-
 	}
 
 	w.Flush()
