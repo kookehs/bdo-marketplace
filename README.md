@@ -28,7 +28,8 @@ You can use the developer tools provided by your browser to look at network requ
 	"input": "filename with list of items to get prices for",
 	"output": "filename of where to dump CSV data",
 	"cookie": "__RequestVerificationToken obtained from session",
-	"token": "__RequestVerificationToken obtained from making a sub list request",
+	"token": "__RequestVerificationToken obtained from making a request",
+	"agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
 	"url": "regional URL"
 }
 ```
@@ -53,6 +54,5 @@ id,name,grade,enhancement,maximum,minimum,price,count
 13414,Yuria Crescent Pendulum,1,18,100000000,86500000,93500000,0
 13414,Yuria Crescent Pendulum,1,19,354000000,306000000,330000000,0
 13414,Yuria Crescent Pendulum,1,20,795000000,685000000,740000000,0
-
 ```
 4. Profit
