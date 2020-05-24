@@ -15,11 +15,11 @@ You can use the developer tools provided by your browser to look at network requ
 2. Open `Developer Tools` for your browser and select `Network`.
     - For Chrome it's `Ctrl+Shift+I` and click `Network` tab.
     - For Firefox it's `Ctrl+Shift+E` to open `Network` tab.
-3. Click the search icon. Search for any item.
+3. Click the search icon. Search for an item with enhancement levels.
 4. Click on the listing to open up details for that item.
-5. Check for a request to `GetWorldMarketSubList` in `Network` tab.
+5. Check for a request to `GetItemSellBuyInfo` in `Network` tab.
     - `cookie` is found in ` Request Headers` under `Cookie` -> `__RequestVerificationToken`.
-   - `token` is found in `Form Data` under `__RequestVerificationToken`.
+    - `token` is found in `Form Data` under `__RequestVerificationToken`.
 
 ## Usage
 1. Configure config.json
@@ -43,8 +43,16 @@ bdo-marketplace-windows64.exe
 ```
 3. Upload CSV dump to your spreadsheet
 ```
-id,name,grade,price,count
-9213,Beer,1,1050,98870
-9283,Cold Draft Beer,2,2030,34326
+id,name,grade,enhancement,maximum,minimum,price,count
+13414,Yuria Crescent Pendulum,1,0,103000,89500,96500,82
+13414,Yuria Crescent Pendulum,1,8,1970000,1710000,1840000,5
+13414,Yuria Crescent Pendulum,1,11,2710000,2350000,2530000,0
+13414,Yuria Crescent Pendulum,1,13,5600000,4860000,5250000,0
+13414,Yuria Crescent Pendulum,1,16,27900000,24100000,26000000,0
+13414,Yuria Crescent Pendulum,1,17,41600000,35800000,38700000,0
+13414,Yuria Crescent Pendulum,1,18,100000000,86500000,93500000,0
+13414,Yuria Crescent Pendulum,1,19,354000000,306000000,330000000,0
+13414,Yuria Crescent Pendulum,1,20,795000000,685000000,740000000,0
+
 ```
 4. Profit
