@@ -22,10 +22,10 @@ type ItemInfo struct {
 	Name        string
 	Grade       int
 	Enhancement int
-	Price       int
-	Count       int
-	Maximum     int
-	Minimum     int
+	Price       int64
+	Count       int64
+	Maximum     int64
+	Minimum     int64
 }
 
 type ItemInfos []ItemInfo
@@ -103,7 +103,7 @@ func GetPrices(client *BDOMarketplaceClient, items *Items) ItemInfos {
 
 			ii := ItemInfo{
 				ID:          id,
-				Name:        v.Name,
+				Name:        dl.Name,
 				Grade:       grade,
 				Enhancement: dl.SubKey,
 				Price:       dl.PricePerOne,
@@ -148,10 +148,10 @@ func DumpToCSV(path string, items ItemInfos) {
 			v.Name,
 			strconv.Itoa(v.Grade),
 			strconv.Itoa(v.Enhancement),
-			strconv.Itoa(v.Maximum),
-			strconv.Itoa(v.Minimum),
-			strconv.Itoa(v.Price),
-			strconv.Itoa(v.Count),
+			strconv.FormatInt(v.Maximum, 10),
+			strconv.FormatInt(v.Minimum, 10),
+			strconv.FormatInt(v.Price, 10),
+			strconv.FormatInt(v.Count, 10),
 		}
 
 		if err := w.Write(r); err != nil {

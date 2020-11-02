@@ -22,13 +22,13 @@ const (
 )
 
 type GetItemSellBuyInfoResponse struct {
-	PriceList                 []int                      `json:"priceList"`
+	PriceList                 []int64                    `json:"priceList"`
 	MarketConditionList       []ItemSellBuyInfoCondition `json:"marketConditionList"`
-	BasePrice                 int                        `json:"basePrice"`
+	BasePrice                 int64                      `json:"basePrice"`
 	EnchantGroup              int                        `json:"enchantGroup"`
 	EnchantMaxGroup           int                        `json:"enchantMaxGroup"`
 	EnchantMaterialKey        int                        `json:"enchantMaterialKey"`
-	EnchantMaterialPrice      int                        `json:"enchantMaterialPrice"`
+	EnchantMaterialPrice      int64                      `json:"enchantMaterialPrice"`
 	EnchantNeedCount          int                        `json:"enchantNeedCount"`
 	MaxRegisterForWorldMarket int                        `json:"maxRegisterForWorldMarket"`
 	CountValue                int                        `json:"countValue"`
@@ -45,18 +45,18 @@ type GetWorldMarketSearchSubListResponse struct {
 }
 
 type ItemSellBuyInfoCondition struct {
-	SellCount   int `json:"sellCount"`
-	BuyCount    int `json:"buyCount"`
-	PricePerOne int `json:"pricePerOne"`
+	SellCount   int   `json:"sellCount"`
+	BuyCount    int   `json:"buyCount"`
+	PricePerOne int64 `json:"pricePerOne"`
 }
 
 type WorldMarketSearchSubListItem struct {
-	PricePerOne     int    `json:"pricePerOne"`
-	TotalTradeCount int    `json:"totalTradeCount"`
+	PricePerOne     int64  `json:"pricePerOne"`
+	TotalTradeCount int64  `json:"totalTradeCount"`
 	KeyType         int    `json:"keyType"`
 	MainKey         int    `json:"mainKey"`
 	SubKey          int    `json:"subKey"`
-	Count           int    `json:"count"`
+	Count           int64  `json:"count"`
 	Name            string `json:"name"`
 	Grade           int    `json:"grade"`
 	MainCategory    int    `json:"mainCategory"`
