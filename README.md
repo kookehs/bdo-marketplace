@@ -35,24 +35,22 @@ You can use the developer tools provided by your browser to look at network requ
 ```
 2. Execute binary for your system
 ```
-bdo-marketplace-darwin32
-bdo-marketplace-darwin64
-bdo-marketplace-linux32
-bdo-marketplace-linux64
-bdo-marketplace-windows32.exe
-bdo-marketplace-windows64.exe
+bdo-marketplace-darwin-arm64
+bdo-marketplace-darwin-amd64
+bdo-marketplace-linux-x8632
+bdo-marketplace-linux-amd64
+bdo-marketplace-windows-x8632.exe
+bdo-marketplace-windows-amd64.exe
 ```
 3. Upload CSV dump to your spreadsheet
 ```
 id,name,grade,enhancement,maximum,minimum,price,count
-13414,Yuria Crescent Pendulum,1,0,103000,89500,96500,82
-13414,Yuria Crescent Pendulum,1,8,1970000,1710000,1840000,5
-13414,Yuria Crescent Pendulum,1,11,2710000,2350000,2530000,0
-13414,Yuria Crescent Pendulum,1,13,5600000,4860000,5250000,0
-13414,Yuria Crescent Pendulum,1,16,27900000,24100000,26000000,0
-13414,Yuria Crescent Pendulum,1,17,41600000,35800000,38700000,0
-13414,Yuria Crescent Pendulum,1,18,100000000,86500000,93500000,0
-13414,Yuria Crescent Pendulum,1,19,354000000,306000000,330000000,0
-13414,Yuria Crescent Pendulum,1,20,795000000,685000000,740000000,0
+719898,Fallen God's Armor,1,0,30100000000,25900000000,28000000000,0
+719898,Desperate Fallen God's Armor,1,1,30500000000,26300000000,28400000000,0
+719898,Distorted Fallen God's Armor,1,2,32200000000,27800000000,30000000000,0
+719898,Silent Fallen God's Armor,1,3,40500000000,34900000000,37700000000,0
+719898,Wailing Fallen God's Armor,1,4,122000000000,106000000000,114000000000,0
+719898,Obliterating Fallen God's Armor,1,5,303000000000,261000000000,282000000000,0
+7304,Strawberry,1,0,585,545,585,0
 ```
 4. Profit
