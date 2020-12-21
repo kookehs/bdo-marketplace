@@ -22,7 +22,10 @@ You can use the developer tools provided by your browser to look at network requ
     - `token` is found in `Form Data` under `__RequestVerificationToken`.
 
 ## Usage
-1. Configure config.json
+1. Download the latest release [here](https://github.com/kookehs/bdo-marketplace/releases).
+- Grab the `config.json` and the appropriate executable for your system.
+- The `items.json` file is a list of some item IDs for reference. You can create your own with relevant IDs.
+2. Configure config.json
 ```
 {
 	"input": "filename with list of items to get prices for",
@@ -33,24 +36,31 @@ You can use the developer tools provided by your browser to look at network requ
 	"url": "regional URL"
 }
 ```
-2. Execute binary for your system
+3. Execute binary for your system
 ```
 bdo-marketplace-darwin-arm64
 bdo-marketplace-darwin-amd64
-bdo-marketplace-linux-x8632
+bdo-marketplace-linux-386
 bdo-marketplace-linux-amd64
-bdo-marketplace-windows-x8632.exe
+bdo-marketplace-windows-386.exe
 bdo-marketplace-windows-amd64.exe
 ```
-3. Upload CSV dump to your spreadsheet
+4. Upload CSV dump to your spreadsheet
 ```
 id,name,grade,enhancement,maximum,minimum,price,count
-719898,Fallen God's Armor,1,0,30100000000,25900000000,28000000000,0
-719898,Desperate Fallen God's Armor,1,1,30500000000,26300000000,28400000000,0
-719898,Distorted Fallen God's Armor,1,2,32200000000,27800000000,30000000000,0
-719898,Silent Fallen God's Armor,1,3,40500000000,34900000000,37700000000,0
+719898,Fallen God's Armor,1,0,37700000000,32500000000,35100000000,0
+719898,Desperate Fallen God's Armor,1,1,40500000000,34900000000,37700000000,0
+719898,Distorted Fallen God's Armor,1,2,53500000000,46300000000,50000000000,1
+719898,Silent Fallen God's Armor,1,3,65500000000,56500000000,61000000000,0
 719898,Wailing Fallen God's Armor,1,4,122000000000,106000000000,114000000000,0
 719898,Obliterating Fallen God's Armor,1,5,303000000000,261000000000,282000000000,0
 7304,Strawberry,1,0,585,545,585,0
+9065,Milk,0,0,10800,10000,10800,0
+705511,Manos Ring,1,0,244000000,210000000,227000000,144
+705511,Manos Ring,1,1,381000000,329000000,355000000,2
+705511,Manos Ring,1,2,1130000000,985000000,1060000000,6
+705511,Manos Ring,1,3,3830000000,3310000000,3570000000,5
+705511,Manos Ring,1,4,17500000000,15100000000,16300000000,0
+705511,Manos Ring,1,5,59000000000,55000000000,59000000000,0
 ```
-4. Profit
+5. Profit
