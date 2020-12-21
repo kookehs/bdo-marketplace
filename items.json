@@ -120765,92 +120765,44 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701011",
-                        "name": "Akum Helmet",
-                        "grade": "2",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/13_hel\/00010937.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701011\/"
-                }
+                "id": "701011",
+                "name": "Akum Helmet",
+                "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701012",
-                        "name": "Akum Armor",
-                        "grade": "2",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/09_upperbody\/00010938.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701012\/"
-                }
+                "id": "701012",
+                "name": "Akum Armor",
+                "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701013",
-                        "name": "Akum Gloves",
-                        "grade": "2",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/11_hand\/00010939.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701013\/"
-                }
+                "id": "701013",
+                "name": "Akum Gloves",
+                "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701014",
-                        "name": "Akum Shoes",
-                        "grade": "2",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/12_foot\/00010940.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701014\/"
-                }
+                "id": "701014",
+                "name": "Akum Shoes",
+                "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701083",
-                        "name": "Fiery Nouver Dagger",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/08_subweapon\/00701083.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701083\/"
-                }
+                "id": "701083",
+                "name": "Fiery Nouver Dagger",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701084",
-                        "name": "Fiery Kutum Dagger",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/08_subweapon\/00701084.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701084\/"
-                }
+                "id": "701084",
+                "name": "Fiery Kutum Dagger",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701087",
-                        "name": "Fiery Nouver Ornamental Knot",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/08_subweapon\/00701087.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701087\/"
-                }
+                "id": "701087",
+                "name": "Fiery Nouver Ornamental Knot",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701099",
-                        "name": "Fiery Nouver Noble Sword",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/08_subweapon\/00701099.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701099\/"
-                }
+                "id": "701099",
+                "name": "Fiery Nouver Noble Sword",
+                "grade": "4"
         },
         {
                 "id": "7010",
@@ -120858,15 +120810,9 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "701100",
-                        "name": "Fiery Noble Sword of Kutum",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/08_subweapon\/00701100.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/701100\/"
-                }
+                "id": "701100",
+                "name": "Fiery Noble Sword of Kutum",
+                "grade": "4"
         },
         {
                 "id": "7011",
@@ -120979,26 +120925,14 @@
                 "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "703541",
-                        "name": "Arsha&#39;s Longsword (Accuracy)",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/01_weapon\/00010014.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/703541\/"
-                }
+                "id": "703541",
+                "name": "Arsha&#39;s Longsword (Accuracy)",
+                "grade": "3"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "703651",
-                        "name": "Arsha&#39;s Helmet (Damage Reduction)",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/13_hel\/00010937.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/703651\/"
-                }
+                "id": "703651",
+                "name": "Arsha&#39;s Helmet (Damage Reduction)",
+                "grade": "3"
         },
         {
                 "id": "703",
@@ -121011,37 +120945,19 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "705047",
-                        "name": "Manos Alchemist&#39;s Clothes",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/09_upperbody\/00705047.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/705047\/"
-                }
+                "id": "705047",
+                "name": "Manos Alchemist&#39;s Clothes",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "705511",
-                        "name": "Manos Ring",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/16_ring\/00705003.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/705511\/"
-                }
+                "id": "705511",
+                "name": "Manos Ring",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "705512",
-                        "name": "Manos Belt",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/18_belt\/00705004.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/705512\/"
-                }
+                "id": "705512",
+                "name": "Manos Belt",
+                "grade": "4"
         },
         {
                 "id": "705",
@@ -121049,15 +120965,9 @@
                 "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "706211",
-                        "name": "Valks\u2019 Earring: Accuracy (7 Days)",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/17_earring\/00011814.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/706211\/"
-                }
+                "id": "706211",
+                "name": "Valks\u2019 Earring: Accuracy (7 Days)",
+                "grade": "3"
         },
         {
                 "id": "706",
@@ -121130,15 +121040,9 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "711907",
-                        "name": "Cliff&#39;s Axe",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/01_weapon\/00010614.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/711907\/"
-                }
+                "id": "711907",
+                "name": "Cliff&#39;s Axe",
+                "grade": "3"
         },
         {
                 "id": "711",
@@ -121161,48 +121065,24 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "715001",
-                        "name": "Blackstar Longsword",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/01_weapon\/00715001.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/715001\/"
-                }
+                "id": "715001",
+                "name": "Blackstar Longsword",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "715003",
-                        "name": "Blackstar Longbow",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/01_weapon\/00715003.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/715003\/"
-                }
+                "id": "715003",
+                "name": "Blackstar Longbow",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "715005",
-                        "name": "Blackstar Amulet",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/01_weapon\/00715005.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/715005\/"
-                }
+                "id": "715005",
+                "name": "Blackstar Amulet",
+                "grade": "4"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "715016",
-                        "name": "Blackstar Kriegsmesser",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/01_weapon\/00715016.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/715016\/"
-                }
+                "id": "715016",
+                "name": "Blackstar Kriegsmesser",
+                "grade": "4"
         },
         {
                 "id": "715",
@@ -121255,15 +121135,9 @@
                 "grade": "0"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "720506",
-                        "name": "Manos Processing Stone - Lava",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/06_pc_equipitem\/00_common\/00_etc\/00720506.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/720506\/"
-                }
+                "id": "720506",
+                "name": "Manos Processing Stone - Lava",
+                "grade": "4"
         },
         {
                 "id": "7205",
@@ -121286,37 +121160,19 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "721002",
-                        "name": "Ancient Spirit Dust",
-                        "grade": "1",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/03_etc\/00721002.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/721002\/"
-                }
+                "id": "721002",
+                "name": "Ancient Spirit Dust",
+                "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "721003",
-                        "name": "Caphras Stone",
-                        "grade": "2",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/03_etc\/00721003.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/721003\/"
-                }
+                "id": "721003",
+                "name": "Caphras Stone",
+                "grade": "2"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "721011",
-                        "name": "Pure Magical Black Stone",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/03_etc\/11_enchant_material\/00721011.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/721011\/"
-                }
+                "id": "721011",
+                "name": "Pure Magical Black Stone",
+                "grade": "3"
         },
         {
                 "id": "721",
@@ -121864,15 +121720,9 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "750298",
-                        "name": "Combat &amp; Skill EXP 530% Scroll (60 min)",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/03_etc\/00750298.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/750298\/"
-                }
+                "id": "750298",
+                "name": "Combat &amp; Skill EXP 530% Scroll (60 min)",
+                "grade": "3"
         },
         {
                 "id": "7502",
@@ -121885,15 +121735,9 @@
                 "grade": "1"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "750400",
-                        "name": "Deluxe Essential Pack",
-                        "grade": "3",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/03_etc\/00750400.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/750400\/"
-                }
+                "id": "750400",
+                "name": "Deluxe Essential Pack",
+                "grade": "3"
         },
         {
                 "id": "7504",
@@ -123056,15 +122900,9 @@
                 "grade": "0"
         },
         {
-                "code": 200,
-                "message": "",
-                "data": {
-                        "id": "800066",
-                        "name": "[Level 5] 102 Year Old Golden Herb",
-                        "grade": "4",
-                        "icon": "https:\/\/bdocodex.com\/items\/new_icon\/03_etc\/10_free_tradeitem\/00800011.png",
-                        "url": "https:\/\/bdocodex.com\/us\/item\/800066\/"
-                }
+                "id": "800066",
+                "name": "[Level 5] 102 Year Old Golden Herb",
+                "grade": "4"
         },
         {
                 "id": "801",
