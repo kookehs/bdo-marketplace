@@ -22,15 +22,60 @@ type BuyListing struct {
 	LeftCount          int    `json:"leftCount"`
 }
 
+func (bl BuyListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, bl.Name)
+	csv = append(csv, strconv.Itoa(bl.MainKey))
+	csv = append(csv, strconv.Itoa(bl.Grade))
+	csv = append(csv, strconv.Itoa(bl.ChooseKey))
+	csv = append(csv, strconv.Itoa(bl.Count))
+	csv = append(csv, strconv.Itoa(bl.KeyType))
+	csv = append(csv, strconv.Itoa(bl.MainCategory))
+	csv = append(csv, strconv.Itoa(bl.SubCategory))
+	csv = append(csv, strconv.Itoa(bl.SubKey))
+	csv = append(csv, strconv.FormatUint(bl.AddEnchantPrice, 10))
+	csv = append(csv, strconv.FormatUint(bl.BuyNo, 10))
+	csv = append(csv, strconv.FormatUint(bl.RegisterMoneyCount, 10))
+	csv = append(csv, strconv.Itoa(bl.BoughtCount))
+	csv = append(csv, strconv.Itoa(bl.LeftCount))
+
+	return csv
+}
+
 type DetailList struct {
 	ItemListing
 	TotalTradeCount uint64 `json:"totalTradeCount"`
+}
+
+func (dl DetailList) CSV() []string {
+	csv := []string{}
+	csv = append(csv, dl.Name)
+	csv = append(csv, strconv.Itoa(dl.MainKey))
+	csv = append(csv, strconv.Itoa(dl.Grade))
+	csv = append(csv, strconv.Itoa(dl.ChooseKey))
+	csv = append(csv, strconv.Itoa(dl.Count))
+	csv = append(csv, strconv.Itoa(dl.KeyType))
+	csv = append(csv, strconv.Itoa(dl.MainCategory))
+	csv = append(csv, strconv.Itoa(dl.SubCategory))
+	csv = append(csv, strconv.Itoa(dl.SubKey))
+	csv = append(csv, strconv.FormatUint(dl.TotalTradeCount, 10))
+
+	return csv
 }
 
 type Item struct {
 	Name    string `json:"name"`
 	MainKey int    `json:"mainKey"`
 	Grade   int    `json:"grade"`
+}
+
+func (i Item) CSV() []string {
+	csv := []string{}
+	csv = append(csv, i.Name)
+	csv = append(csv, strconv.Itoa(i.MainKey))
+	csv = append(csv, strconv.Itoa(i.Grade))
+
+	return csv
 }
 
 type ItemExtended struct {
@@ -43,9 +88,40 @@ type ItemExtended struct {
 	SubKey       int `json:"subKey"`
 }
 
+func (ie ItemExtended) CSV() []string {
+	csv := []string{}
+	csv = append(csv, ie.Name)
+	csv = append(csv, strconv.Itoa(ie.MainKey))
+	csv = append(csv, strconv.Itoa(ie.Grade))
+	csv = append(csv, strconv.Itoa(ie.ChooseKey))
+	csv = append(csv, strconv.Itoa(ie.Count))
+	csv = append(csv, strconv.Itoa(ie.KeyType))
+	csv = append(csv, strconv.Itoa(ie.MainCategory))
+	csv = append(csv, strconv.Itoa(ie.SubCategory))
+	csv = append(csv, strconv.Itoa(ie.SubKey))
+
+	return csv
+}
+
 type ItemListing struct {
 	ItemExtended
 	PricePerOne uint64 `json:"pricePerOne"`
+}
+
+func (il ItemListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, il.Name)
+	csv = append(csv, strconv.Itoa(il.MainKey))
+	csv = append(csv, strconv.Itoa(il.Grade))
+	csv = append(csv, strconv.Itoa(il.ChooseKey))
+	csv = append(csv, strconv.Itoa(il.Count))
+	csv = append(csv, strconv.Itoa(il.KeyType))
+	csv = append(csv, strconv.Itoa(il.MainCategory))
+	csv = append(csv, strconv.Itoa(il.SubCategory))
+	csv = append(csv, strconv.Itoa(il.SubKey))
+	csv = append(csv, strconv.FormatUint(il.PricePerOne, 10))
+
+	return csv
 }
 
 type HotListing struct {
@@ -56,10 +132,39 @@ type HotListing struct {
 	Subtype          int    `json:"substype"`
 }
 
+func (hl HotListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, hl.Name)
+	csv = append(csv, strconv.Itoa(hl.MainKey))
+	csv = append(csv, strconv.Itoa(hl.Grade))
+	csv = append(csv, strconv.Itoa(hl.ChooseKey))
+	csv = append(csv, strconv.Itoa(hl.Count))
+	csv = append(csv, strconv.Itoa(hl.KeyType))
+	csv = append(csv, strconv.Itoa(hl.MainCategory))
+	csv = append(csv, strconv.Itoa(hl.SubCategory))
+	csv = append(csv, strconv.Itoa(hl.SubKey))
+	csv = append(csv, strconv.FormatUint(hl.PricePerOne, 10))
+	csv = append(csv, strconv.FormatUint(hl.FluctuationPrice, 10))
+	csv = append(csv, strconv.FormatUint(hl.TotalTradeCount, 10))
+	csv = append(csv, strconv.Itoa(hl.FluctuationType))
+	csv = append(csv, strconv.Itoa(hl.Subtype))
+
+	return csv
+}
+
 type MarketCondition struct {
 	PricePerOne uint64 `json:"pricePerOne"`
 	BuyCount    int    `json:"buyCount"`
 	SellCount   int    `json:"sellCount"`
+}
+
+func (mc MarketCondition) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.FormatUint(mc.PricePerOne, 10))
+	csv = append(csv, strconv.Itoa(mc.BuyCount))
+	csv = append(csv, strconv.Itoa(mc.SellCount))
+
+	return csv
 }
 
 type MarketListing struct {
@@ -68,17 +173,45 @@ type MarketListing struct {
 	SumCount int    `json:"sumCount"`
 }
 
+func (ml MarketListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, ml.Name)
+	csv = append(csv, strconv.Itoa(ml.MainKey))
+	csv = append(csv, strconv.Itoa(ml.Grade))
+	csv = append(csv, strconv.FormatUint(ml.MinPrice, 10))
+	csv = append(csv, strconv.Itoa(ml.SumCount))
+
+	return csv
+}
+
 type PriceHistory struct {
 	Days  string `json:"days"`
 	Value uint64 `json:"value"`
 }
 
+func (ph PriceHistory) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.FormatUint(ph.Value, 10))
+	csv = append(csv, ph.Days)
+
+	return csv
+}
+
 type SearchListing struct {
-	Name          string `json:"name"`
-	Grade         int    `json:"grade"`
-	MainKey       int    `json:"mainKey"`
-	SumCount      int    `json:"sumCount"`
-	TotalSumCount int    `json:"totalSumCount"`
+	Item
+	SumCount      int `json:"sumCount"`
+	TotalSumCount int `json:"totalSumCount"`
+}
+
+func (sl SearchListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, sl.Name)
+	csv = append(csv, strconv.Itoa(sl.MainKey))
+	csv = append(csv, strconv.Itoa(sl.Grade))
+	csv = append(csv, strconv.Itoa(sl.SumCount))
+	csv = append(csv, strconv.Itoa(sl.TotalSumCount))
+
+	return csv
 }
 
 type SellListing struct {
@@ -94,12 +227,55 @@ type SellListing struct {
 	RingBuff             bool   `json:"ringBuff"`
 }
 
+func (sl SellListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, sl.Name)
+	csv = append(csv, strconv.Itoa(sl.MainKey))
+	csv = append(csv, strconv.Itoa(sl.Grade))
+	csv = append(csv, strconv.Itoa(sl.ChooseKey))
+	csv = append(csv, strconv.Itoa(sl.Count))
+	csv = append(csv, strconv.Itoa(sl.KeyType))
+	csv = append(csv, strconv.Itoa(sl.MainCategory))
+	csv = append(csv, strconv.Itoa(sl.SubCategory))
+	csv = append(csv, strconv.Itoa(sl.SubKey))
+	csv = append(csv, strconv.FormatUint(sl.AccumulateMoneyCount, 10))
+	csv = append(csv, strconv.FormatUint(sl.AddEnchantPrice, 10))
+	csv = append(csv, strconv.FormatUint(sl.EnchantMaterialPrice, 10))
+	csv = append(csv, strconv.FormatUint(sl.SellNo, 10))
+	csv = append(csv, strconv.Itoa(sl.EnchantNeedCount))
+	csv = append(csv, strconv.Itoa(sl.LeftCount))
+	csv = append(csv, strconv.Itoa(sl.SoldCount))
+	csv = append(csv, strconv.FormatBool(sl.IsSealed))
+	csv = append(csv, strconv.FormatBool(sl.RingBuff))
+
+	return csv
+}
+
 type WalletListing struct {
 	ItemExtended
 	NationCode int  `json:"nationCode"`
 	ServerNo   int  `json:"serverNo"`
 	UserNo     int  `json:"userNo"`
 	IsSealed   bool `json:"isSealed"`
+}
+
+func (wl WalletListing) CSV() []string {
+	csv := []string{}
+	csv = append(csv, wl.Name)
+	csv = append(csv, strconv.Itoa(wl.MainKey))
+	csv = append(csv, strconv.Itoa(wl.Grade))
+	csv = append(csv, strconv.Itoa(wl.ChooseKey))
+	csv = append(csv, strconv.Itoa(wl.Count))
+	csv = append(csv, strconv.Itoa(wl.KeyType))
+	csv = append(csv, strconv.Itoa(wl.MainCategory))
+	csv = append(csv, strconv.Itoa(wl.SubCategory))
+	csv = append(csv, strconv.Itoa(wl.SubKey))
+	csv = append(csv, strconv.Itoa(wl.NationCode))
+	csv = append(csv, strconv.Itoa(wl.ServerNo))
+	csv = append(csv, strconv.Itoa(wl.UserNo))
+	csv = append(csv, strconv.FormatBool(wl.IsSealed))
+
+	return csv
 }
 
 func ParametersToBody(parameters map[string]string) *bytes.Buffer {
@@ -128,7 +304,7 @@ type Client struct {
 	RequestVerificationToken string
 }
 
-func NewClient(url string, headers map[string]string, token, timeout string) *Client {
+func NewClient(baseURL string, headers map[string]string, token, timeout, proxy string) *Client {
 	duration, err := time.ParseDuration(timeout)
 
 	if err != nil {
@@ -137,17 +313,34 @@ func NewClient(url string, headers map[string]string, token, timeout string) *Cl
 		return nil
 	}
 
+	transport := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+	}
+
+	if proxy != "" {
+		proxyURL, err := url.Parse(proxy)
+
+		if err != nil {
+			log.Println(err)
+
+			return nil
+		}
+
+		transport.Proxy = http.ProxyURL(proxyURL)
+	}
+
 	return &Client{
-		BaseURL: url,
+		BaseURL: baseURL,
 		Client: &http.Client{
-			Timeout: duration,
+			Timeout:   duration,
+			Transport: transport,
 		},
 		Headers:                  headers,
 		RequestVerificationToken: token,
 	}
 }
 
-func (c *Client) Request(method, endpoint string, body io.Reader) []byte {
+func (c Client) Request(method, endpoint string, body io.Reader) []byte {
 	baseURL, err := url.Parse(c.BaseURL)
 
 	if err != nil {
@@ -194,7 +387,7 @@ func (c *Client) Request(method, endpoint string, body io.Reader) []byte {
 	return data
 }
 
-func (c *Client) BuyItem(input BuyItemInput) *BuyItemOutput {
+func (c Client) BuyItem(input BuyItemInput) *BuyItemOutput {
 	parameters := map[string]string{
 		BuyPriceString:     strconv.FormatUint(input.BuyPrice, 10),
 		BuyChooseKeyString: strconv.Itoa(input.BuyChooseKey),
@@ -221,7 +414,7 @@ func (c *Client) BuyItem(input BuyItemInput) *BuyItemOutput {
 	return output
 }
 
-func (c *Client) CalculateSellBidding(input CalculateSellBiddingInput) *CalculateSellBiddingOutput {
+func (c Client) CalculateSellBidding(input CalculateSellBiddingInput) *CalculateSellBiddingOutput {
 	parameters := map[string]string{
 		SellNoString:    strconv.FormatUint(input.SellNo, 10),
 		ChooseKeyString: strconv.Itoa(input.ChooseKey),
@@ -249,7 +442,34 @@ func (c *Client) CalculateSellBidding(input CalculateSellBiddingInput) *Calculat
 	return output
 }
 
-func (c *Client) GetItemSellBuyInfo(input GetItemSellBuyInfoInput) *GetItemSellBuyInfoOutput {
+func (c Client) GetDetailList(token string, id int) []DetailList {
+	input := GetWorldMarketSubListInput{
+		Token:   token,
+		MainKey: id,
+	}
+
+	output := c.GetWorldMarketSubList(input)
+
+	if output == nil {
+		return nil
+	}
+
+	return output.DetailList
+}
+
+func (c Client) GetItemInfo(token string, mainKey, subKey int) *GetItemSellBuyInfoOutput {
+	input := GetItemSellBuyInfoInput{
+		Token:   token,
+		KeyType: 0,
+		MainKey: mainKey,
+		SubKey:  subKey,
+		IsUp:    true,
+	}
+
+	return c.GetItemSellBuyInfo(input)
+}
+
+func (c Client) GetItemSellBuyInfo(input GetItemSellBuyInfoInput) *GetItemSellBuyInfoOutput {
 	parameters := map[string]string{
 		TokenString:   input.Token,
 		MainKeyString: strconv.Itoa(input.MainKey),
@@ -276,7 +496,7 @@ func (c *Client) GetItemSellBuyInfo(input GetItemSellBuyInfoInput) *GetItemSellB
 	return output
 }
 
-func (c *Client) GetMyBiddingList() *GetMyBiddingListOutput {
+func (c Client) GetMyBiddingList() *GetMyBiddingListOutput {
 	data := c.Request(http.MethodPost, GetMyBiddingListEndpoint, nil)
 
 	if data == nil {
@@ -294,7 +514,7 @@ func (c *Client) GetMyBiddingList() *GetMyBiddingListOutput {
 	return output
 }
 
-func (c *Client) GetMyWalletList() *GetMyWalletListOutput {
+func (c Client) GetMyWalletList() *GetMyWalletListOutput {
 	data := c.Request(http.MethodPost, GetMyWalletListEndpoint, nil)
 
 	if data == nil {
@@ -312,7 +532,7 @@ func (c *Client) GetMyWalletList() *GetMyWalletListOutput {
 	return output
 }
 
-func (c *Client) GetWorldMarketHotList() *GetWorldMarketHotListOutput {
+func (c Client) GetWorldMarketHotList() *GetWorldMarketHotListOutput {
 	data := c.Request(http.MethodPost, GetWorldMarketHotListEndpoint, nil)
 
 	if data == nil {
@@ -330,7 +550,7 @@ func (c *Client) GetWorldMarketHotList() *GetWorldMarketHotListOutput {
 	return output
 }
 
-func (c *Client) GetWorldMarketList(input GetWorldMarketListInput) *GetWorldMarketListOutput {
+func (c Client) GetWorldMarketList(input GetWorldMarketListInput) *GetWorldMarketListOutput {
 	parameters := map[string]string{
 		TokenString:   input.Token,
 		MainKeyString: strconv.Itoa(input.MainKey),
@@ -355,7 +575,7 @@ func (c *Client) GetWorldMarketList(input GetWorldMarketListInput) *GetWorldMark
 	return output
 }
 
-func (c *Client) GetWorldMarketSearchList(input GetWorldMarketSearchListInput) *GetWorldMarketSearchListOutput {
+func (c Client) GetWorldMarketSearchList(input GetWorldMarketSearchListInput) *GetWorldMarketSearchListOutput {
 	parameters := map[string]string{
 		SearchTextString: input.SearchText,
 		TokenString:      input.Token,
@@ -379,10 +599,10 @@ func (c *Client) GetWorldMarketSearchList(input GetWorldMarketSearchListInput) *
 	return output
 }
 
-func (c *Client) GetWorldMarketSubList(input GetWorldMarketSubListInput) *GetWorldMarketSearchListOutput {
+func (c Client) GetWorldMarketSubList(input GetWorldMarketSubListInput) *GetWorldMarketSubListOutput {
 	parameters := map[string]string{
-		MainKeyString: input.MainKey,
 		TokenString:   input.Token,
+		MainKeyString: strconv.Itoa(input.MainKey),
 	}
 
 	body := ParametersToBody(parameters)
@@ -392,7 +612,7 @@ func (c *Client) GetWorldMarketSubList(input GetWorldMarketSubListInput) *GetWor
 		return nil
 	}
 
-	output := &GetWorldMarketSearchListOutput{}
+	output := &GetWorldMarketSubListOutput{}
 
 	if err := json.Unmarshal(data, output); err != nil {
 		log.Println(err)
@@ -403,7 +623,7 @@ func (c *Client) GetWorldMarketSubList(input GetWorldMarketSubListInput) *GetWor
 	return output
 }
 
-func (c *Client) SellItem(input SellItemInput) *SellItemOutput {
+func (c Client) SellItem(input SellItemInput) *SellItemOutput {
 	parameters := map[string]string{
 		TokenString:         c.RequestVerificationToken,
 		SellPriceString:     strconv.FormatUint(input.SellPrice, 10),
@@ -433,7 +653,7 @@ func (c *Client) SellItem(input SellItemInput) *SellItemOutput {
 	return output
 }
 
-func (c *Client) WithdrawBuyBidding(input WithdrawBuyBiddingInput) *WithdrawBuyBiddingOutput {
+func (c Client) WithdrawBuyBidding(input WithdrawBuyBiddingInput) *WithdrawBuyBiddingOutput {
 	parameters := map[string]string{
 		BuyNoString:     strconv.FormatUint(input.BuyNo, 10),
 		ChooseKeyString: strconv.Itoa(input.ChooseKey),
@@ -461,7 +681,7 @@ func (c *Client) WithdrawBuyBidding(input WithdrawBuyBiddingInput) *WithdrawBuyB
 	return output
 }
 
-func (c *Client) WithdrawSellBidding(input WithdrawSellBiddingInput) *WithdrawSellBiddingOutput {
+func (c Client) WithdrawSellBidding(input WithdrawSellBiddingInput) *WithdrawSellBiddingOutput {
 	parameters := map[string]string{
 		SellNoString:    strconv.FormatUint(input.SellNo, 10),
 		ChooseKeyString: strconv.Itoa(input.ChooseKey),

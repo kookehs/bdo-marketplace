@@ -2,7 +2,9 @@ package centralmarket
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
+	"strconv"
 	"strings"
 )
 
@@ -28,6 +30,7 @@ const (
 	SellNoString        = "sellNo"
 	SellPriceString     = "sellPrice"
 	SellSubKeyString    = "sellSubKey"
+	SessionString       = "ASP.NET_SessionId"
 	SubKeyString        = "subKey"
 	TokenString         = "__RequestVerificationToken"
 
@@ -58,6 +61,14 @@ type BuyItemOutput struct {
 	ResultOutput
 }
 
+func (bio BuyItemOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(bio.ResultCode))
+	csv = append(csv, bio.ResultMsg)
+
+	return csv
+}
+
 type CalculateSellBiddingInput struct {
 	SellNo    uint64 `json:"sellNo"`
 	ChooseKey int    `json:"chooseKey"`
@@ -69,6 +80,14 @@ type CalculateSellBiddingInput struct {
 
 type CalculateSellBiddingOutput struct {
 	ResultOutput
+}
+
+func (csbo CalculateSellBiddingOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(csbo.ResultCode))
+	csv = append(csv, csbo.ResultMsg)
+
+	return csv
 }
 
 type GetItemSellBuyInfoInput struct {
@@ -95,7 +114,41 @@ type GetItemSellBuyInfoOutput struct {
 	SellMaxCount              int               `json:"sellMaxCount"`
 }
 
-func (gisbio *GetItemSellBuyInfoOutput) PriceHistory() []PriceHistory {
+func (gisbio GetItemSellBuyInfoOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gisbio.ResultCode))
+	csv = append(csv, gisbio.ResultMsg)
+
+	bytes, err := json.Marshal(gisbio.MarketConditionList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	bytes, err = json.Marshal(gisbio.PriceList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+	csv = append(csv, strconv.FormatUint(gisbio.BasePrice, 10))
+	csv = append(csv, strconv.FormatUint(gisbio.EnchantMaterialPrice, 10))
+	csv = append(csv, strconv.Itoa(gisbio.BuyMaxCount))
+	csv = append(csv, strconv.Itoa(gisbio.CountValue))
+	csv = append(csv, strconv.Itoa(gisbio.EnchantGroup))
+	csv = append(csv, strconv.Itoa(gisbio.EnchantGroupMax))
+	csv = append(csv, strconv.Itoa(gisbio.EnchantMaterialKey))
+	csv = append(csv, strconv.Itoa(gisbio.EnchantNeedCount))
+	csv = append(csv, strconv.Itoa(gisbio.MaxRegisterForWorldMarket))
+	csv = append(csv, strconv.Itoa(gisbio.SellMaxCount))
+
+	return csv
+}
+
+func (gisbio GetItemSellBuyInfoOutput) PriceHistory() []PriceHistory {
 	history := []PriceHistory{}
 	data := strings.ReplaceAll(gisbio.ResultMsg, "\\", "")
 
@@ -112,6 +165,30 @@ type GetMyBiddingListOutput struct {
 	SellList []SellListing `json:"sellList"`
 }
 
+func (gmblo GetMyBiddingListOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gmblo.ResultCode))
+	csv = append(csv, gmblo.ResultMsg)
+
+	bytes, err := json.Marshal(gmblo.BuyList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	bytes, err = json.Marshal(gmblo.SellList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	return csv
+}
+
 type GetMyWalletListOutput struct {
 	ResultOutput
 	MyWalletList     []WalletListing `json:"myWalletList"`
@@ -124,9 +201,49 @@ type GetMyWalletListOutput struct {
 	UseValuePackage  bool            `json:"useValuePackage"`
 }
 
+func (gmwlo GetMyWalletListOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gmwlo.ResultCode))
+	csv = append(csv, gmwlo.ResultMsg)
+
+	bytes, err := json.Marshal(gmwlo.MyWalletList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	csv = append(csv, strconv.FormatUint(gmwlo.FeeRate, 10))
+	csv = append(csv, strconv.Itoa(gmwlo.RingBuffCount))
+	csv = append(csv, strconv.Itoa(gmwlo.AddWeight))
+	csv = append(csv, strconv.Itoa(gmwlo.MaxWeight))
+	csv = append(csv, strconv.Itoa(gmwlo.TotalWeight))
+	csv = append(csv, strconv.FormatBool(gmwlo.UseAddWeightBuff))
+	csv = append(csv, strconv.FormatBool(gmwlo.UseValuePackage))
+
+	return csv
+}
+
 type GetWorldMarketHotListOutput struct {
 	ResultOutput
 	HotList []HotListing `json:"hotList"`
+}
+
+func (gwmhlo GetWorldMarketHotListOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gwmhlo.ResultCode))
+	csv = append(csv, gwmhlo.ResultMsg)
+
+	bytes, err := json.Marshal(gwmhlo.HotList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	return csv
 }
 
 type GetWorldMarketListInput struct {
@@ -140,6 +257,22 @@ type GetWorldMarketListOutput struct {
 	MarketList []MarketListing `json:"marketList"`
 }
 
+func (gwmlo GetWorldMarketListOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gwmlo.ResultCode))
+	csv = append(csv, gwmlo.ResultMsg)
+
+	bytes, err := json.Marshal(gwmlo.MarketList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	return csv
+}
+
 type GetWorldMarketSearchListInput struct {
 	SearchText string `json:"searchText"`
 	Token      string `json:"__RequestVerificationToken"`
@@ -150,9 +283,25 @@ type GetWorldMarketSearchListOutput struct {
 	List []SearchListing `json:"list"`
 }
 
+func (gwmslo GetWorldMarketSearchListOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gwmslo.ResultCode))
+	csv = append(csv, gwmslo.ResultMsg)
+
+	bytes, err := json.Marshal(gwmslo.List)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	return csv
+}
+
 type GetWorldMarketSubListInput struct {
-	MainKey string `json:"mainKey"`
 	Token   string `json:"__RequestVerificationToken"`
+	MainKey int    `json:"mainKey"`
 }
 
 type GetWorldMarketSubListOutput struct {
@@ -160,9 +309,33 @@ type GetWorldMarketSubListOutput struct {
 	DetailList []DetailList `json:"detailList"`
 }
 
+func (gwmslo GetWorldMarketSubListOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(gwmslo.ResultCode))
+	csv = append(csv, gwmslo.ResultMsg)
+
+	bytes, err := json.Marshal(gwmslo.DetailList)
+
+	if err != nil {
+		return nil
+	}
+
+	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+
+	return csv
+}
+
 type ResultOutput struct {
 	ResultMsg  string `json:"resultMsg"`
 	ResultCode int    `json:"resultCode"`
+}
+
+func (ro ResultOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(ro.ResultCode))
+	csv = append(csv, ro.ResultMsg)
+
+	return csv
 }
 
 type SellItemInput struct {
@@ -180,6 +353,14 @@ type SellItemOutput struct {
 	ResultOutput
 }
 
+func (sio SellItemOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(sio.ResultCode))
+	csv = append(csv, sio.ResultMsg)
+
+	return csv
+}
+
 type WithdrawBuyBiddingInput struct {
 	BuyNo     uint64 `json:"buyNo"`
 	ChooseKey int    `json:"chooseKey"`
@@ -191,6 +372,14 @@ type WithdrawBuyBiddingInput struct {
 
 type WithdrawBuyBiddingOutput struct {
 	ResultOutput
+}
+
+func (wbbo WithdrawBuyBiddingOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(wbbo.ResultCode))
+	csv = append(csv, wbbo.ResultMsg)
+
+	return csv
 }
 
 type WithdrawSellBiddingInput struct {
@@ -205,4 +394,12 @@ type WithdrawSellBiddingInput struct {
 
 type WithdrawSellBiddingOutput struct {
 	ResultOutput
+}
+
+func (wsbo WithdrawSellBiddingOutput) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.Itoa(wsbo.ResultCode))
+	csv = append(csv, wsbo.ResultMsg)
+
+	return csv
 }
