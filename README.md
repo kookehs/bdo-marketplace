@@ -1,16 +1,26 @@
 # bdo-marketplace
-💱 collecting data from Black Desert Online's marketplace
+💱 collecting data and executing trades through Black Desert Online's Central Market API
 
 ## Features
-- Prices from `market.blackdesertonline.com` API
-- Regional Markets
+- Regional markets
 - Dump to CSV
+- Data from `market.blackdesertonline.com` API
+  - 🛍️ Your bid listings
+  - 🎒 Your Central Market inventory
+  - 🔥 View hot listings
+  - 📒 Search market listings
+  - 💹 Get an item's order book and price history
+- Trade actions
+  - Buy items
+  - Sell items
+  - Collect funds
+  - Cancel listings
 
 ## Obtaining credentials for API calls
 You can use the developer tools provided by your browser to look at network requests for the site.
 
 0. You may need to spoof `User-Agent` as a mobile browser. Not sure if they have removed the restriction on viewing marketplace from mobile only.
-1. https://market.blackdesertonline.com/
+1. https://market.blackdesertonline.com/ or other regional URL
     - Select your region and sign in.
 2. Open `Developer Tools` for your browser and select `Network`.
     - For Chrome it's `Ctrl+Shift+I` and click `Network` tab.
@@ -18,10 +28,15 @@ You can use the developer tools provided by your browser to look at network requ
 3. Click the search icon. Search for an item with enhancement levels.
 4. Click on the listing to open up details for that item.
 5. Check for a request to `GetItemSellBuyInfo` in `Network` tab.
-    - `cookie` is found in ` Request Headers` under `Cookie` -> `__RequestVerificationToken`.
+    - `cookie` is found in `Request Headers` under `Cookie` -> `__RequestVerificationToken`.
+    - `session` is found in `Request Headers` under `Cookie` -> `ASP.NET_SessionId`.
     - `token` is found in `Form Data` under `__RequestVerificationToken`.
 
 ## Usage
+This repository can be used as a library. 
+
+Executable included to simply fetch and dump data for a list of items to CSV.
+
 1. Download the latest release [here](https://github.com/kookehs/bdo-marketplace/releases).
 - Grab the `config.json` and the appropriate executable for your system.
 - The `items.json` file is a list of some item IDs for reference. You can create your own with relevant IDs.
@@ -64,3 +79,10 @@ id,name,grade,enhancement,maximum,minimum,price,count
 705511,Manos Ring,1,5,59000000000,55000000000,59000000000,0
 ```
 5. Profit
+
+## Roadmap to 0.1
+- Support for multiple input and output files.
+- Switch provided executable over to new library.
+- Have provided executable dump price history.
+- Proxy support for `centralmarket.Client`.
+- Better logging of errors.
