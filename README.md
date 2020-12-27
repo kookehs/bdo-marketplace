@@ -19,6 +19,8 @@
 ## Obtaining credentials for API calls
 You can use the developer tools provided by your browser to look at network requests for the site.
 
+Retrieving data only requires the two `__RequestVerificationToken`, but trade actions will require the additional `ASP.NET_SessionId`.
+
 0. You may need to spoof `User-Agent` as a mobile browser. Not sure if they have removed the restriction on viewing marketplace from mobile only.
 1. https://market.blackdesertonline.com/ or other regional URL
     - Select your region and sign in.
@@ -28,9 +30,9 @@ You can use the developer tools provided by your browser to look at network requ
 3. Click the search icon. Search for an item with enhancement levels.
 4. Click on the listing to open up details for that item.
 5. Check for a request to `GetItemSellBuyInfo` in `Network` tab.
-    - `cookie` is found in `Request Headers` under `Cookie` -> `__RequestVerificationToken`.
+    - `cookieToken` is found in `Request Headers` under `Cookie` -> `__RequestVerificationToken`.
     - `session` is found in `Request Headers` under `Cookie` -> `ASP.NET_SessionId`.
-    - `token` is found in `Form Data` under `__RequestVerificationToken`.
+    - `formToken` is found in `Form Data` under `__RequestVerificationToken`.
 
 ## Usage
 This repository can be used as a library. 
@@ -43,15 +45,28 @@ Executable included to simply fetch and dump data for a list of items to CSV.
 2. Configure config.json
 ```
 {
-	"input": "filename with list of items to get prices for",
-	"output": "filename of where to dump CSV data",
-	"cookie": "__RequestVerificationToken obtained from session",
-	"token": "__RequestVerificationToken obtained from making a request",
-	"agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36",
-	"url": "regional URL"
+	"files": [
+		{
+			"input": "food.json",
+			"output": "food.csv"
+		},
+		{
+			"input": "gear.json",
+			"output": "gear.csv"
+		}
+	],
+	"headers": {
+		"cookieToken": "",
+		"session": "",
+		"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36"
+	},
+	"proxy": "",
+	"timeout": "1s",
+	"formToken": "",
+	"url": "https://marketweb-na.blackdesertonline.com"
 }
 ```
-3. Execute binary for your system
+3. Execute one of the following binaries for your system
 ```
 bdo-marketplace-darwin-arm64
 bdo-marketplace-darwin-amd64
@@ -60,6 +75,11 @@ bdo-marketplace-linux-amd64
 bdo-marketplace-windows-386.exe
 bdo-marketplace-windows-amd64.exe
 ```
+
+You can specify the `--config` flag to point to a JSON file of your choosing. Otherwise defaults to `./config.json`.
+
+`> bdo-marketplace-windows-amd64.exe --config "../example.json"`
+
 4. Upload CSV dump to your spreadsheet
 ```
 id,name,grade,enhancement,maximum,minimum,price,count

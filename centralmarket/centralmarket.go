@@ -623,9 +623,19 @@ func (c Client) GetWorldMarketSubList(input GetWorldMarketSubListInput) *GetWorl
 	return output
 }
 
+func (c Client) PriceHistory(token string, mainKey, subKey int) []PriceHistory {
+	info := c.GetItemInfo(token, mainKey, subKey)
+
+	if info == nil {
+		return nil
+	}
+
+	return info.PriceHistory()
+}
+
 func (c Client) SellItem(input SellItemInput) *SellItemOutput {
 	parameters := map[string]string{
-		TokenString:         c.RequestVerificationToken,
+		TokenString:         input.Token,
 		SellPriceString:     strconv.FormatUint(input.SellPrice, 10),
 		SellChooseKeyString: strconv.Itoa(input.SellChooseKey),
 		SellCountString:     strconv.Itoa(input.SellCount),

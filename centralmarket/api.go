@@ -117,7 +117,7 @@ type GetItemSellBuyInfoOutput struct {
 func (gisbio GetItemSellBuyInfoOutput) CSV() []string {
 	csv := []string{}
 	csv = append(csv, strconv.Itoa(gisbio.ResultCode))
-	csv = append(csv, gisbio.ResultMsg)
+	csv = append(csv, fmt.Sprintf("%q", gisbio.ResultMsg))
 
 	bytes, err := json.Marshal(gisbio.MarketConditionList)
 
@@ -339,6 +339,7 @@ func (ro ResultOutput) CSV() []string {
 }
 
 type SellItemInput struct {
+	Token         string `json:"__RequestVerificationToken"`
 	SellPrice     uint64 `json:"sellPrice"`
 	SellChooseKey int    `json:"sellChooseKey"`
 	SellCount     int    `json:"sellCount"`
