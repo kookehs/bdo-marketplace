@@ -191,10 +191,22 @@ type PriceHistory struct {
 
 func (ph PriceHistory) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.FormatUint(ph.Value, 10))
 	csv = append(csv, ph.Days)
+	csv = append(csv, strconv.FormatUint(ph.Value, 10))
 
 	return csv
+}
+
+type PriceHistories []PriceHistory
+
+func (ph PriceHistories) CSV() [][]string {
+	rows := [][]string{}
+
+	for _, history := range ph {
+		rows = append(rows, history.CSV())
+	}
+
+	return rows
 }
 
 type SearchListing struct {
@@ -623,7 +635,7 @@ func (c Client) GetWorldMarketSubList(input GetWorldMarketSubListInput) *GetWorl
 	return output
 }
 
-func (c Client) PriceHistory(token string, mainKey, subKey int) []PriceHistory {
+func (c Client) PriceHistory(token string, mainKey, subKey int) PriceHistories {
 	info := c.GetItemInfo(token, mainKey, subKey)
 
 	if info == nil {

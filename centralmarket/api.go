@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -148,8 +149,25 @@ func (gisbio GetItemSellBuyInfoOutput) CSV() []string {
 	return csv
 }
 
-func (gisbio GetItemSellBuyInfoOutput) PriceHistory() []PriceHistory {
-	history := []PriceHistory{}
+func (gisbio GetItemSellBuyInfoOutput) MinMaxPrices() (uint64, uint64) {
+	max := uint64(0)
+	min := uint64(math.MaxUint64)
+
+	for _, condition := range gisbio.MarketConditionList {
+		if condition.PricePerOne > max {
+			max = condition.PricePerOne
+		}
+
+		if condition.PricePerOne < min {
+			min = condition.PricePerOne
+		}
+	}
+
+	return min, max
+}
+
+func (gisbio GetItemSellBuyInfoOutput) PriceHistory() PriceHistories {
+	history := PriceHistories{}
 	data := strings.ReplaceAll(gisbio.ResultMsg, "\\", "")
 
 	if err := json.Unmarshal([]byte(data), &history); err != nil {
