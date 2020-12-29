@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"math"
 	"net/http"
 	"net/url"
 	"path"
@@ -120,6 +121,29 @@ func (il ItemListing) CSV() []string {
 	csv = append(csv, strconv.Itoa(il.SubCategory))
 	csv = append(csv, strconv.Itoa(il.SubKey))
 	csv = append(csv, strconv.FormatUint(il.PricePerOne, 10))
+
+	return csv
+}
+
+type ItemPrices struct {
+	BasePrice uint64 `json:"basePrice"`
+	MaxPrice  uint64 `json:"maxPrice"`
+	MinPrice  uint64 `json:"minPrice"`
+}
+
+func NewItemPrices() ItemPrices {
+	return ItemPrices{
+		BasePrice: 0,
+		MaxPrice:  0,
+		MinPrice:  math.MaxUint64,
+	}
+}
+
+func (ip ItemPrices) CSV() []string {
+	csv := []string{}
+	csv = append(csv, strconv.FormatUint(ip.BasePrice, 10))
+	csv = append(csv, strconv.FormatUint(ip.MaxPrice, 10))
+	csv = append(csv, strconv.FormatUint(ip.MinPrice, 10))
 
 	return csv
 }

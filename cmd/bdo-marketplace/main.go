@@ -7,16 +7,34 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"reflect"
+	"strconv"
+	"sync"
 
 	"github.com/kookehs/bdo-marketplace/centralmarket"
 )
 
 const (
 	defaultConfigFilename = "./config.json"
+	logFilename           = "error.log"
 )
 
 func main() {
+	logFile, err := os.OpenFile(logFilename, os.O_APPEND|os.O_CREATE, os.ModePerm)
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	defer func() {
+		if err := logFile.Close(); err != nil {
+			log.Println(err)
+		}
+	}()
+
+	log.SetOutput(logFile)
+
 	configFilename := flag.String("config", "config.json", "location of config.json")
 	flag.Parse()
 
@@ -46,6 +64,12 @@ func main() {
 	session := centralmarket.SessionString + "=" + config.Headers.Session
 	cookie := cookieToken + ";" + session
 
+	if config.Headers.CookieToken == "" || config.FormToken == "" {
+		log.Println("CookieToken and FormToken must be present in config file")
+
+		return
+	}
+
 	client := centralmarket.NewClient(
 		config.URL,
 		map[string]string{
@@ -62,28 +86,18 @@ func main() {
 		return
 	}
 
+	waitGroup := sync.WaitGroup{}
+
 	for _, pair := range config.Files {
-		headers := false
-		rows := [][]string{}
-		items := ParseItemList(pair.Input)
+		waitGroup.Add(1)
 
-		for _, item := range items {
-			detailList := client.GetDetailList(client.RequestVerificationToken, item.ID)
-
-			for _, detail := range detailList {
-				info := client.GetItemInfo(client.RequestVerificationToken, detail.MainKey, detail.SubKey)
-
-				if !headers {
-					headers = true
-					rows = append(rows, CSVHeaders(reflect.TypeOf(info)))
-				}
-
-				rows = append(rows, info.CSV())
-			}
-		}
-
-		DumpToCSV(pair.Output, rows)
+		go func(client *centralmarket.Client, pair FilePair) {
+			defer waitGroup.Done()
+			GetMarketData(client, pair)
+		}(client, pair)
 	}
+
+	waitGroup.Wait()
 }
 
 func CSVHeaders(structType reflect.Type) []string {
@@ -97,16 +111,30 @@ func CSVHeaders(structType reflect.Type) []string {
 		return nil
 	}
 
-	for index := 0; index < structType.NumField(); index++ {
-		field := structType.Field(index)
-		tag := field.Tag.Get("json")
+	queue := []reflect.Type{structType}
+	visited := map[string]bool{}
 
-		if tag != "" {
-			headers = append(headers, tag)
+	for len(queue) > 0 {
+		node := queue[0]
+		queue = queue[1:]
+
+		if _, ok := visited[node.Name()]; ok {
+			continue
 		}
 
-		if field.Anonymous {
-			headers = append(headers, CSVHeaders(field.Type)...)
+		visited[node.Name()] = true
+
+		for index := 0; index < node.NumField(); index++ {
+			field := node.Field(index)
+			tag := field.Tag.Get("json")
+
+			if tag != "" {
+				headers = append(headers, tag)
+			}
+
+			if field.Anonymous {
+				queue = append(queue, field.Type)
+			}
 		}
 	}
 
@@ -116,6 +144,16 @@ func CSVHeaders(structType reflect.Type) []string {
 func DumpToCSV(filename string, rows [][]string) {
 	if rows == nil {
 		return
+	}
+
+	directory := path.Dir(filename)
+
+	if _, err := os.Stat(directory); os.IsNotExist(err) {
+		if err := os.MkdirAll(directory, os.ModePerm); err != nil {
+			log.Println(err)
+
+			return
+		}
 	}
 
 	file, err := os.Create(filename)
@@ -139,4 +177,39 @@ func DumpToCSV(filename string, rows [][]string) {
 	}
 
 	writer.Flush()
+}
+
+func GetMarketData(client *centralmarket.Client, pair FilePair) {
+	rows := [][]string{}
+
+	labels := append([]string{}, CSVHeaders(reflect.TypeOf(centralmarket.Item{}))...)
+	labels = append(labels, CSVHeaders(reflect.TypeOf(centralmarket.GetItemSellBuyInfoOutput{}))...)
+	labels = append(labels, CSVHeaders(reflect.TypeOf(centralmarket.ItemPrices{}))...)
+	labels = append(labels, "count")
+	rows = append(rows, labels)
+
+	for _, item := range ParseItemList(pair.Input) {
+		detailList := client.GetDetailList(client.RequestVerificationToken, item.ID)
+
+		for _, detail := range detailList {
+			info := client.GetItemInfo(client.RequestVerificationToken, detail.MainKey, detail.SubKey)
+			prices := info.Prices()
+
+			fields := append([]string{}, detail.Item.CSV()...)
+			fields = append(fields, info.CSV()...)
+			fields = append(fields, prices.CSV()...)
+			fields = append(fields, strconv.Itoa(detail.Count))
+			rows = append(rows, fields)
+
+			history := info.PriceHistory()
+
+			if len(history) > 0 {
+				historyCSV := [][]string{CSVHeaders(reflect.TypeOf(history[0]))}
+				historyCSV = append(historyCSV, history.CSV()...)
+				DumpToCSV("history/"+detail.Item.Name+"."+strconv.Itoa(detail.SubKey)+".csv", historyCSV)
+			}
+		}
+	}
+
+	DumpToCSV(pair.Output, rows)
 }

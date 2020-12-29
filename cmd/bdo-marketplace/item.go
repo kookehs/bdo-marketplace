@@ -4,12 +4,20 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"strconv"
 )
 
 type Item struct {
-	Name  string `json:"name"`
-	Grade int    `json:"grade"`
-	ID    int    `json:"id"`
+	Name string `json:"name"`
+	ID   int    `json:"id"`
+}
+
+func (i Item) CSV() []string {
+	csv := []string{}
+	csv = append(csv, i.Name)
+	csv = append(csv, strconv.Itoa(i.ID))
+
+	return csv
 }
 
 func ParseItemList(filename string) []Item {

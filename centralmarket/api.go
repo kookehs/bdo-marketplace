@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math"
 	"strconv"
 	"strings"
 )
@@ -64,8 +63,8 @@ type BuyItemOutput struct {
 
 func (bio BuyItemOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(bio.ResultCode))
 	csv = append(csv, bio.ResultMsg)
+	csv = append(csv, strconv.Itoa(bio.ResultCode))
 
 	return csv
 }
@@ -85,8 +84,8 @@ type CalculateSellBiddingOutput struct {
 
 func (csbo CalculateSellBiddingOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(csbo.ResultCode))
 	csv = append(csv, csbo.ResultMsg)
+	csv = append(csv, strconv.Itoa(csbo.ResultCode))
 
 	return csv
 }
@@ -117,9 +116,6 @@ type GetItemSellBuyInfoOutput struct {
 
 func (gisbio GetItemSellBuyInfoOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gisbio.ResultCode))
-	csv = append(csv, fmt.Sprintf("%q", gisbio.ResultMsg))
-
 	bytes, err := json.Marshal(gisbio.MarketConditionList)
 
 	if err != nil {
@@ -145,25 +141,27 @@ func (gisbio GetItemSellBuyInfoOutput) CSV() []string {
 	csv = append(csv, strconv.Itoa(gisbio.EnchantNeedCount))
 	csv = append(csv, strconv.Itoa(gisbio.MaxRegisterForWorldMarket))
 	csv = append(csv, strconv.Itoa(gisbio.SellMaxCount))
+	csv = append(csv, fmt.Sprintf("%q", gisbio.ResultMsg))
+	csv = append(csv, strconv.Itoa(gisbio.ResultCode))
 
 	return csv
 }
 
-func (gisbio GetItemSellBuyInfoOutput) MinMaxPrices() (uint64, uint64) {
-	max := uint64(0)
-	min := uint64(math.MaxUint64)
+func (gisbio GetItemSellBuyInfoOutput) Prices() ItemPrices {
+	prices := NewItemPrices()
+	prices.BasePrice = gisbio.BasePrice
 
 	for _, condition := range gisbio.MarketConditionList {
-		if condition.PricePerOne > max {
-			max = condition.PricePerOne
+		if condition.PricePerOne > prices.MaxPrice {
+			prices.MaxPrice = condition.PricePerOne
 		}
 
-		if condition.PricePerOne < min {
-			min = condition.PricePerOne
+		if condition.PricePerOne < prices.MinPrice {
+			prices.MinPrice = condition.PricePerOne
 		}
 	}
 
-	return min, max
+	return prices
 }
 
 func (gisbio GetItemSellBuyInfoOutput) PriceHistory() PriceHistories {
@@ -185,9 +183,6 @@ type GetMyBiddingListOutput struct {
 
 func (gmblo GetMyBiddingListOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gmblo.ResultCode))
-	csv = append(csv, gmblo.ResultMsg)
-
 	bytes, err := json.Marshal(gmblo.BuyList)
 
 	if err != nil {
@@ -203,6 +198,8 @@ func (gmblo GetMyBiddingListOutput) CSV() []string {
 	}
 
 	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+	csv = append(csv, gmblo.ResultMsg)
+	csv = append(csv, strconv.Itoa(gmblo.ResultCode))
 
 	return csv
 }
@@ -221,9 +218,6 @@ type GetMyWalletListOutput struct {
 
 func (gmwlo GetMyWalletListOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gmwlo.ResultCode))
-	csv = append(csv, gmwlo.ResultMsg)
-
 	bytes, err := json.Marshal(gmwlo.MyWalletList)
 
 	if err != nil {
@@ -231,7 +225,6 @@ func (gmwlo GetMyWalletListOutput) CSV() []string {
 	}
 
 	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
-
 	csv = append(csv, strconv.FormatUint(gmwlo.FeeRate, 10))
 	csv = append(csv, strconv.Itoa(gmwlo.RingBuffCount))
 	csv = append(csv, strconv.Itoa(gmwlo.AddWeight))
@@ -239,6 +232,8 @@ func (gmwlo GetMyWalletListOutput) CSV() []string {
 	csv = append(csv, strconv.Itoa(gmwlo.TotalWeight))
 	csv = append(csv, strconv.FormatBool(gmwlo.UseAddWeightBuff))
 	csv = append(csv, strconv.FormatBool(gmwlo.UseValuePackage))
+	csv = append(csv, gmwlo.ResultMsg)
+	csv = append(csv, strconv.Itoa(gmwlo.ResultCode))
 
 	return csv
 }
@@ -250,9 +245,6 @@ type GetWorldMarketHotListOutput struct {
 
 func (gwmhlo GetWorldMarketHotListOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gwmhlo.ResultCode))
-	csv = append(csv, gwmhlo.ResultMsg)
-
 	bytes, err := json.Marshal(gwmhlo.HotList)
 
 	if err != nil {
@@ -260,6 +252,8 @@ func (gwmhlo GetWorldMarketHotListOutput) CSV() []string {
 	}
 
 	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+	csv = append(csv, gwmhlo.ResultMsg)
+	csv = append(csv, strconv.Itoa(gwmhlo.ResultCode))
 
 	return csv
 }
@@ -277,9 +271,6 @@ type GetWorldMarketListOutput struct {
 
 func (gwmlo GetWorldMarketListOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gwmlo.ResultCode))
-	csv = append(csv, gwmlo.ResultMsg)
-
 	bytes, err := json.Marshal(gwmlo.MarketList)
 
 	if err != nil {
@@ -287,6 +278,8 @@ func (gwmlo GetWorldMarketListOutput) CSV() []string {
 	}
 
 	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+	csv = append(csv, gwmlo.ResultMsg)
+	csv = append(csv, strconv.Itoa(gwmlo.ResultCode))
 
 	return csv
 }
@@ -303,9 +296,6 @@ type GetWorldMarketSearchListOutput struct {
 
 func (gwmslo GetWorldMarketSearchListOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gwmslo.ResultCode))
-	csv = append(csv, gwmslo.ResultMsg)
-
 	bytes, err := json.Marshal(gwmslo.List)
 
 	if err != nil {
@@ -313,6 +303,8 @@ func (gwmslo GetWorldMarketSearchListOutput) CSV() []string {
 	}
 
 	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+	csv = append(csv, gwmslo.ResultMsg)
+	csv = append(csv, strconv.Itoa(gwmslo.ResultCode))
 
 	return csv
 }
@@ -329,9 +321,6 @@ type GetWorldMarketSubListOutput struct {
 
 func (gwmslo GetWorldMarketSubListOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(gwmslo.ResultCode))
-	csv = append(csv, gwmslo.ResultMsg)
-
 	bytes, err := json.Marshal(gwmslo.DetailList)
 
 	if err != nil {
@@ -339,6 +328,8 @@ func (gwmslo GetWorldMarketSubListOutput) CSV() []string {
 	}
 
 	csv = append(csv, fmt.Sprintf("%q", string(bytes)))
+	csv = append(csv, gwmslo.ResultMsg)
+	csv = append(csv, strconv.Itoa(gwmslo.ResultCode))
 
 	return csv
 }
@@ -350,8 +341,8 @@ type ResultOutput struct {
 
 func (ro ResultOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(ro.ResultCode))
 	csv = append(csv, ro.ResultMsg)
+	csv = append(csv, strconv.Itoa(ro.ResultCode))
 
 	return csv
 }
@@ -374,8 +365,8 @@ type SellItemOutput struct {
 
 func (sio SellItemOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(sio.ResultCode))
 	csv = append(csv, sio.ResultMsg)
+	csv = append(csv, strconv.Itoa(sio.ResultCode))
 
 	return csv
 }
@@ -395,8 +386,8 @@ type WithdrawBuyBiddingOutput struct {
 
 func (wbbo WithdrawBuyBiddingOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(wbbo.ResultCode))
 	csv = append(csv, wbbo.ResultMsg)
+	csv = append(csv, strconv.Itoa(wbbo.ResultCode))
 
 	return csv
 }
@@ -417,8 +408,8 @@ type WithdrawSellBiddingOutput struct {
 
 func (wsbo WithdrawSellBiddingOutput) CSV() []string {
 	csv := []string{}
-	csv = append(csv, strconv.Itoa(wsbo.ResultCode))
 	csv = append(csv, wsbo.ResultMsg)
+	csv = append(csv, strconv.Itoa(wsbo.ResultCode))
 
 	return csv
 }
